@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <table class="table table-sm" *ngIf='product.id'>
+        <tr>
+            <th>Vendor:</th>
+            <td>{{product.vendor.name}}</td>
+        </tr>
+        <tr>
+            <th>Part Number</th>
+            <td>{{product.partNumber}}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{product.name}}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{product.price | currency}} </td>
+        </tr>
+        <tr>
+            <th>Unit</th>
+            <td>{{product.unit}}</td>
+        </tr>
+        <tr  *ngIf="product.photoPath">
+            <th>Photo</th>
+            <td>
+                <img src="{{product.photoPath}}" width="125" height="150">
+            </td>
+        </tr>
+    </table>
+    <div *ngIf="isAdmin">
+        <button class="btn btn-sm btn-warning" routerLink="/products/edit/{{product.id}}">Edit</button> |
+        <button class="btn btn-sm btn-danger" (click)='delete()'>Delete</button>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-dark">
+    <a routerLink="/home"><img src="assets/PRS logo.svg" width="40" height="30"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngFor="let mi of menuItems" title="{{mi.tooltip}}">
+          <a *ngIf='loggedInUser' class="nav-link" routerLink="{{mi.href}}">{{mi.display}}</a>
+          <a *ngIf='!loggedInUser' class="nav-link disabled">{{mi.display}}</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="loggedInUser && isReviewer" class="nav-link" routerLink="/requests/review">Review</a>
+        </li>
+      </ul>
+      <ul *ngIf='!loggedInUser' class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users/login">Login</a>
+        </li>
+      </ul>
+      <ul *ngIf='loggedInUser' class='navbar-nav navbar-right'>
+        <li class='nav-item dropdown'>
+          <a class="nav-link dropdown-toggle" id='navbarDropdown' role='button' href='#' data-toggle='dropdown'
+            aria-haspopup="true" aria-expanded="false">Hello,
+            {{loggedInUser.firstName}}
+            {{loggedInUser.lastName}}</a>
+          <div class='dropdown-menu' aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink='/users/detail/{{loggedInUser.id}}'>My Account</a>
+            <div class='dropdown-divider'></div>
+            <a class="dropdown-item" href='#'>Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,40 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <div *ngIf="loggedInUser">
+        <table class="table table-sm">
+            <thead>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </thead>
+            <div *ngIf="!products">Loading...</div>
+            <tbody *ngIf="products">
+                <tr>
+                    <td>
+                        <select [(ngModel)]="lineItem.product">
+                            <option *ngFor="let product of products" [ngValue]="product">{{product.name}},
+                                {{product.vendor.name}}, {{product.price | currency}}</option>
+                        </select>
+                    </td>
+                    <td><input [(ngModel)]="lineItem.quantity" type="number"></td>
+                    <td>
+                        <button class="noBorder" [disabled]="!lineItem.quantity" (click)="save()">
+                            <img src="assets/add-icon.png" width="20" height="20"></button> | 
+                        <button (click)="cancel()" class="noBorder">
+                            <img src="assets/x-mark.png" width="20" height="20">
+                        </button>
+                        <div style="color: red;">{{message}}</div>
+                    </td>
+                </tr>
+                <tr *ngIf="lineItem.product.photoPath">
+                    <td>
+                        <img src="{{lineItem.product.photoPath}}" width="150" height="175">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

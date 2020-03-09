@@ -1,0 +1,34 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <table class="table table-sm">
+        <tr>
+            <th>Code:</th>
+            <td>{{vendor.code}}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{vendor.name}}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{vendor.address}} </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>{{vendor.city}}, {{vendor.state}} {{vendor.zip}}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{vendor.phoneNumber}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{vendor.email}}</td>
+        </tr>
+    </table>
+    <p *ngIf="isAdmin">
+        <button class="btn btn-sm btn-warning" routerLink="/vendors/edit/{{vendor.id}}">Edit</button> |
+        <button class="btn btn-sm btn-danger" (click)='delete()'>Delete</button>
+    </p>
+</div>

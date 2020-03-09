@@ -1,0 +1,34 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}
+        <a routerLink="/products/create" *ngIf="isAdmin">
+            <img width="20" height="20" src="assets/add-icon.png" title="Add New">
+        </a>
+    </h3>
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th><a (click)="sort('vendor.name')">Vendor</a></th>
+                <th><a (click)="sort('name')">Name</a></th>
+                <th><a (click)="sort('price')">Price</a></th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products | sort:sortColumn:ascOrder">
+                <td>{{product.vendor.name}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency}}</td>
+                <td>
+                    <a routerLink="/products/detail/{{product.id}}">
+                        <img width="20" height="20" src="assets/details.png" title="User Detail">
+                    </a>
+                    <span *ngIf="isAdmin"> | <a routerLink="/products/edit/{{product.id}}">
+                            <img width="20" height="20" src="assets/pencil-icon.png" title="User Edit">
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

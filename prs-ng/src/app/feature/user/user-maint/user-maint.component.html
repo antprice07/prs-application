@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <table class="table table-sm">
+        <tr>
+            <th>Username:</th>
+            <td><input [(ngModel)]="user.username" type="text" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td><input [(ngModel)]="user.password" type="password" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td><input [(ngModel)]="user.firstName" type="text" class="rounded" placeholder="First Name">
+                <input [(ngModel)]="user.lastName" type="text" class="rounded" placeholder="Last Name"></td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>
+                <input [(ngModel)]="user.phoneNumber" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="rounded"
+                    required maxlength="12">
+            </td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><input [(ngModel)]="user.email" type="text" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Reviewer</th>
+            <td><select [(ngModel)]="user.reviewer">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Administrator</th>
+            <td><select [(ngModel)]="user.admin">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button class="btn btn-sm btn-primary" (click)="save()">Save</button>
+        <div class="alert alert-danger" role="alert" *ngIf="message">{{message}}</div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <div *ngIf="loggedInUser">
+        <div *ngIf="!lineItem">Loading...</div>
+        <div *ngIf="lineItem">
+            <div>
+                <img src="{{lineItem.product.photoPath}}" width="150" height="175">
+            </div>
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <td>{{lineItem.product.name}}</td>
+                </tr>
+                <tr>
+                    <th>Product Code</th>
+                    <td>{{lineItem.product.code}}</td>
+                </tr>
+                <tr>
+                    <th>Product Price</th>
+                    <td>{{lineItem.product.price | currency}}</td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td>
+                        <input [(ngModel)]="lineItem.quantity" type="number" (change)="quantityChange()">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sub-Total</th>
+                    <td>{{lineItem.quantity*lineItem.product.price | currency}}</td>
+                </tr>
+            </table>
+            <span>
+                <button class="btn btn-primary" [disabled]="!enableButton && lineItem.quantity"
+                    (click)="save()">Save</button> |
+                <button class="btn btn-warning" (click)="checkDelete()" *ngIf="!doDelete">Delete</button>
+                <span *ngIf="doDelete">
+                    <button class="btn btn-danger" (click)="delete()">Delete</button>
+                    <div>{{deleteMessage}}</div>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>

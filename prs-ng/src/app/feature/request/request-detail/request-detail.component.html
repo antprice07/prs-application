@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <div *ngIf="loggedInUser">
+        <div *ngIf="!request">Loading...</div>
+        <div *ngIf="request">
+
+            <table class="table table-sm">
+                <tr>
+                    <th>User</th>
+                    <td>{{request.user.username}}</td>
+                    <th>Date Needed</th>
+                    <td>{{request.dateNeeded | date: fullDate}}</td>
+                </tr>
+                <tr>
+                    <th>Delivery Type</th>
+                    <td>{{request.deliveryMode}}</td>
+                    <th>Current Status</th>
+                    <td>{{request.status}}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{request.description}}</td>
+                    <th>Current Total</th>
+                    <td>{{request.total | currency}}</td>
+                </tr>
+                <tr>
+                    <th>Justification</th>
+                    <td>{{request.justification}}</td>
+                </tr>
+                <tr *ngIf="request.status == 'REJECTED'">
+                    <th>Reason for Rejection</th>
+                    <td>{{request.reasonForRejection}}</td>
+                </tr>
+            </table>
+            <div>
+                <button class="btn btn-danger btn-sm" *ngIf="loggedInUser.id == request.user.id"
+                    (click)="delete()">Delete</button>
+                <span *ngIf="lineItems[0] && request.status == 'NEW' && loggedInUser.id == request.user.id"> |
+                    <button class="btn btn-primary btn-sm" (click)="submit()">Submit Request</button>
+                </span>
+            </div>
+            <app-list-line-items></app-list-line-items>
+        </div>
+    </div>
+</div>

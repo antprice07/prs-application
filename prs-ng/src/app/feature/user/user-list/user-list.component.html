@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}
+        <a routerLink="/users/create" *ngIf="isAdmin">
+            <img width="20" height="20" src="assets/add-icon.png" title="Add New">
+        </a>
+    </h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <table class="table table-sm table-striped" *ngIf="loggedInUser">
+        <thead>
+            <tr>
+                <th><a (click)="sort('username')">Username</a></th>
+                <th><a (click)="sort('lastName')">Name</a></th>
+                <th>Phone</th>
+                <th><a (click)="sort('email')">Email</a></th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users | sort:sortColumn:ascOrder">
+                <td>{{user.username}}</td>
+                <td>{{user.lastName}}, {{user.firstName}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a routerLink="/users/detail/{{user.id}}">
+                        <img width="20" height="20" src="assets/details.png" title="User Detail">
+                    </a>
+                    <span *ngIf="isAdmin || user.id==loggedInUser.id"> | <a routerLink="/users/edit/{{user.id}}">
+                            <img width="20" height="20" src="assets/pencil-icon.png" title="User Edit">
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

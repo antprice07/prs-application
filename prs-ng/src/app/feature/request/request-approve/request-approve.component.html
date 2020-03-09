@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <div *ngIf="!isReviewer">Must be a reviewer!</div>
+    <div *ngIf="isReviewer">
+        <div *ngIf="!request">Loading...</div>
+        <table *ngIf="request" class="table table-sm">
+            <tr>
+                <th>Description</th>
+                <td>{{request.description}}</td>
+            </tr>
+            <tr>
+                <th>Justification</th>
+                <td>{{request.justification}}</td>
+            </tr>
+            <tr>
+                <th>Date Submitted</th>
+                <td>{{request.submittedDate | date: fullDate}}</td>
+            </tr>
+            <tr>
+                <th>Date Needed</th>
+                <td>{{request.dateNeeded | date:fullDate}}</td>
+            </tr>
+            <tr>
+                <th>Delivery Type</th>
+                <td>{{request.deliveryMode}}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{request.total | currency}}</td>
+            </tr>
+        </table>
+        <app-list-line-items></app-list-line-items>
+        <div>
+            <button class="btn btn-success" (click)="approve()">Approve</button>
+            <button class="btn btn-danger" (click)="checkReject()">Reject</button>
+        </div>
+        <div class="form-row" *ngIf="rejectBool">
+            <div class="col">
+                <textarea [(ngModel)]="request.reasonForRejection" class="form-control" type="text" maxlength="100"
+                    style="width: 25em;" placeholder="Reason For Rejection (Max: 100 characters)"></textarea>
+                <button [disabled]="!request.reasonForRejection" (click)="reject()"
+                    class="btn btn-danger">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <div *ngIf='loggedInUser'>
+        <table class="table table-sm">
+            <tr>
+                <th>User</th>
+                <td>{{request.user.username}}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <input [(ngModel)]="request.description" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th>Justifaction</th>
+                <td>
+                    <input [(ngModel)]="request.justification" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th>Date Needed</th>
+                <td>
+                    <input [(ngModel)]="request.dateNeeded" type="date">
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <select [(ngModel)]="request.deliveryMode">
+                        <option>Ground</option>
+                        <option>Two-Day</option>
+                        <option>Overnight Air</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <span>
+                <button class="btn btn-primary" (click)="save()">Edit</button>
+            </span>
+        </div>
+    </div>
+</div>

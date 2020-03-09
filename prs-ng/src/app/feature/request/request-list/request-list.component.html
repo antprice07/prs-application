@@ -1,0 +1,57 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}
+        <a routerLink="/requests/create">
+            <img width="20" height="20" src="assets/add-icon.png" title="Add New">
+        </a>
+    </h3>
+    <div *ngIf="!loggedInUser">Please login to continue...</div>
+    <div *ngIf="loggedInUser">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th><a (click)="sort('description')">Description</a></th>
+                    <th><a (click)="sort('status')">Status</a></th>
+                    <th><a (click)="sort('total')">Total</a></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of requests | sort:sortColumn:ascOrder">
+                    <td>{{request.user.username}}</td>
+                    <td>{{request.description}}</td>
+                    <td *ngIf="request.status == 'REVIEW'">
+                        <img src="assets/thinking.png" width="30" height="30" title="Review">
+                    </td>
+                    <td *ngIf="request.status == 'NEW'">
+                        <img src="assets/grimmace.png" width="30" height="30" title="New">
+                    </td>
+                    <td *ngIf="request.status == 'APPROVED'">
+                        <img src="assets/smiley.png" width="30" height="30" title="Approved">
+                    </td>
+                    <td *ngIf="request.status == 'REJECTED'">
+                        <img src="assets/dizzy.png" width="30" height="30">
+                    </td>
+                    <td>{{request.total | currency}}</td>
+                    <td>
+                        <a routerLink="/requests/detail/{{request.id}}">
+                            <img width="20" height="20" src="assets/details.png" title="Request Detail">
+                        </a>
+                        <span *ngIf="loggedInUser.admin || loggedInUser == request.user"> |
+                            <a routerLink="/requests/edit/{{request.id}}">
+                                <img width="20" height="20" src="assets/pencil-icon.png" title="Request Edit">
+                            </a>
+                        </span>
+                        <span *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'">
+                            |
+                            <a routerLink="/requests/lineitems/{{request.id}}">
+                                <img width="20" height="20" src="assets/lines.png" title="Add Line Items">
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

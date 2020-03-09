@@ -1,0 +1,38 @@
+<div class="px-2">
+    <h3>{{title}}
+        <span *ngIf="request">
+            <a routerLink="/requests/lineitems/{{id}}" *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'">
+                <img src="assets/add-icon.png" width="20" height="20">
+            </a>
+        </span>
+    </h3>
+    <div *ngIf="!lineItems">Loading...</div>
+    <div *ngIf="lineItems">
+        <table class="table table-sm table-striped">
+            <thead>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Sub-Total</th>
+                <th *ngIf="request.status == 'NEW'">Actions</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let li of lineItems">
+                    <td>{{li.product.name}}</td>
+                    <td>{{li.quantity}}</td>
+                    <td>{{li.product.price | currency}}</td>
+                    <td>{{li.quantity*li.product.price | currency}}</td>
+                    <td *ngIf='request && request.status == "NEW"'>
+                        <a routerLink="/requests/lineitems/edit/{{li.id}}" *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'">
+                            <img src="assets/pencil-icon.png" width="20" height="20">
+                        </a> | 
+                        <a *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'" (click)="deleteCheck(li.id)">
+                            <img src="assets/delete.jpg" width="20" height="20">
+                        </a>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

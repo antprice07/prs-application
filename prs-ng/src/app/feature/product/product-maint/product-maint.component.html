@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+<div class="px-2">
+    <h3 class="display-4">{{title}}</h3>
+    <table class="table table-sm">
+        <tr>
+            <th>Vendor:</th>
+            <td>
+                <select [(ngModel)]="product.vendor" class="rounded" [compareWith]="compVendor">
+                    <option *ngFor="let v of vendors" [ngValue]="v">{{v.name}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Part Number:</th>
+            <td><input [(ngModel)]="product.partNumber" type="text" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <td><input [(ngModel)]="product.name" type="text" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Price:</th>
+            <td>$<input [(ngModel)]="product.price" type="number" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Unit:</th>
+            <td><input [(ngModel)]="product.unit" type="text" class="rounded"></td>
+        </tr>
+        <tr>
+            <th>Photo Path</th>
+            <td><input [(ngModel)]="product.photoPath" type="text" class="rounded"></td>
+        </tr>
+    </table>
+    <p>
+        <button class="btn btn-sm btn-primary" (click)="save()">Save</button>
+    </p>
+</div>
