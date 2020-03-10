@@ -8,7 +8,7 @@
     </h3>
     <div *ngIf="!lineItems">Loading...</div>
     <div *ngIf="lineItems">
-        <table class="table table-sm table-striped">
+        <table class="table table-sm table-striped table-hover">
             <thead>
                 <th>Product</th>
                 <th>Quantity</th>
@@ -25,11 +25,11 @@
                     <td *ngIf='request && request.status == "NEW"'>
                         <a routerLink="/requests/lineitems/edit/{{li.id}}" *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'">
                             <img src="assets/pencil-icon.png" width="20" height="20">
-                        </a> | 
+                        </a> |
                         <a *ngIf="loggedInUser.id == request.user.id && request.status == 'NEW'" (click)="deleteCheck(li.id)">
                             <img src="assets/delete.jpg" width="20" height="20">
                         </a>
-                        
+
                     </td>
                 </tr>
             </tbody>

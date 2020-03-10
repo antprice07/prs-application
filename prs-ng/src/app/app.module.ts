@@ -32,6 +32,7 @@ import { RequestApproveComponent } from './feature/request/request-approve/reque
 import { SortPipe } from './pipe/sort.pipe';
 import { HomeComponent } from './feature/core/home/home.component';
 import { AboutComponent } from './feature/core/about/about.component';
+import { FootComponent } from './feature/core/foot/foot.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AboutComponent } from './feature/core/about/about.component';
     RequestApproveComponent,
     SortPipe,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    FootComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,79 @@
 .pyr-one {
-    margin: auto;
+    /* margin: auto; */
+    overflow: hidden;
     padding: 0 0;
+    position: relative;
+    animation: leftEnter;
+    animation-duration: 3s;
+    /* animation-delay: 2s; */
+    animation-fill-mode: forwards;
 }
+
 .pyr-two {
     margin: auto;
+    /* overflow: hidden; */
     padding: 0 0;
+    text-align: center;
+    /* animation: rightEnter; */
+    /* animation-duration: 3s; */
+    /* animation-delay: 2s; */
+    /* animation-fill-mode: forwards; */
 }
+
 .pyr-three {
+    /* overflow: hidden; */
     margin: auto;
     padding: 0 0;
+    text-align: center;
+    /* animation: leftEnter3;
+    animation-duration: 3s;
+    /* animation-delay: 3s; */
+    /* animation-fill-mode: forwards; */
 }
+
+.spin {
+    animation: rotate-scale;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes leftEnter {
+    0% {
+        left: -2000px
+    }
+    100% {
+        left: 37.7%
+    }
+}
+
+@keyframes rotate-scale {
+    0% {
+        transform: 0deg;
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg)
+    }
+}
+
+
+/* @keyframes leftEnter3 {
+    0% {
+        left: -2000px
+    }
+    100% {
+        left: 37.7%
+    }
+}
+
+@keyframes rightEnter {
+    0% {
+        right: -2000
+    }
+    100% {
+        left: 37.7%
+    }
+} */

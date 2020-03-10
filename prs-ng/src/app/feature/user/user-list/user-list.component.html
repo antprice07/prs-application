@@ -6,7 +6,7 @@
         </a>
     </h3>
     <div *ngIf="!loggedInUser">Please login to continue...</div>
-    <table class="table table-sm table-striped" *ngIf="loggedInUser">
+    <table class="table table-sm table-striped table-hover" *ngIf="loggedInUser">
         <thead>
             <tr>
                 <th><a (click)="sort('username')">Username</a></th>

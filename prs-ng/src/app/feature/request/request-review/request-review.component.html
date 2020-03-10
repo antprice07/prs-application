@@ -5,27 +5,29 @@
     <div *ngIf="isReviewer">
         <div *ngIf="!requests">Loading...</div>
         <div *ngIf="requests">
-            <table class="table table-sm">
+            <table class="table table-sm table-hover">
                 <thead>
                     <tr>
                         <th>Description</th>
-                        <th>Date Submitted</th>
-                        <th>Date Needed</th>
-                        <th>User</th>
+                        <th><a (click)="sort('request.submittedDate')">Date Submitted</a></th>
+                        <th><a (click)="sort('request.dateNeeded')">Date Needed</a></th>
+                        <th><a (click)="sort('request.user.username')">User</a></th>
                         <th>Total</th>
                         <th>Review</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let r of requests">
+                    <tr *ngFor="let r of requests | sort:sortColumn:ascOrder">
                         <td>{{r.description}}</td>
                         <td>{{r.submittedDate | date: fullDate}}</td>
                         <td>{{r.dateNeeded | date: fullDate}}</td>
                         <td>{{r.user.username}}</td>
                         <td>{{r.total | currency}}</td>
-                        <td><a routerLink="/requests/approve/{{r.id}}">
+                        <td>
+                            <a routerLink="/requests/approve/{{r.id}}">
                                 <img src="assets/review.png" width="20" height="20">
-                            </a></td>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
